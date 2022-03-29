@@ -18,7 +18,9 @@ dev: [![codecov](https://codecov.io/gh/MilosKozak/AndroidAPS/branch/dev/graph/ba
 
 ## Dynamic ISF
 
-To access Dynamic ISF, please use the Dynamic ISF branch. 
+To access Dynamic ISF, please use the dev branch. Dynamic ISF is accessed via a plugin in the config builder that needs to be enabled.
+
+Please note that this is experimental code and it is recommended that you are an experienced AndroidAPS user before embarking on use. Additionally, it is not recommended that this is used with children.
 
 ### Pre-installation notes
 
@@ -60,3 +62,11 @@ Future ISF uses the same TDD value as generated above. It then uses different gl
 If delta is +ve or zero, or delta is negative but predicted glucose is above target, the future ISF value used for determining insulin required is the same as the current ISF.
 
 If delta is -ve, and the predicted glucose level is below target, then the future ISF value is used, as this is a less aggressive value.
+
+**Dynamic ISF Adjustment Factor**
+
+The 1.5 version of the code includes an adjustment factor that allows the user to specify a value between 1% and 300%. This acts as a multiplier on the TDD value and results in the ISF values becoming smaller (ie more insulin required to move glucose levels a small amount) as the value is increased above 100% and larger (ie less insulin required to move glucose levels a small amount) as the value is decreased below 100%.
+
+**Autosens and sensitivity ratio**
+
+In this version of the code, the autosens value no longer uses the traditional oref1 deviation based model and instead uses rolling 24 hour TDD / 7-day average TDD. This is used to adjust basal and targets when the options are selected in preferences.
