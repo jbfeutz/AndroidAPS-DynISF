@@ -254,7 +254,7 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
     var tdd_last8_wt = ( ( ( 1.4 * tdd_4) + ( 0.6 * tdd8to4) ) * 3 );
 
     TDD = ( tdd_last8_wt * 0.6) + ( tdd7 * 0.4 );
-    console.log("TDD = " +TDD+ " using rolling 8h weighted average extrapolation (60%) and 7 day average (40%)");
+    console.log("TDD = " +TDD+ " using rolling 8h weighted average extrapolation - "+tdd_last8_wt+" - (60%) and 7 day average (40%)");
 
            /*console.error("Pump extrapolated TDD = "+tdd_pump+"; ");
             //if (tdd7 > 0){
