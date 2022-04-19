@@ -218,7 +218,7 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
         //*********************************************************************************
 
             console.error("---------------------------------------------------------");
-            console.error( " Dynamic ISF version Beta 1.5 ");
+            console.error( " Dynamic ISF version Beta 1.6 ");
             console.error("---------------------------------------------------------");
 
 
@@ -249,7 +249,14 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
             var tdd_pump = ( tdd_pump_now / (now / 24));*/
             var TDD = (tdd7 * 0.4) + (tdd_pump * 0.6);
 
-           console.error("Pump extrapolated TDD = "+tdd_pump+"; ");
+    var tdd_4 = meal_data.TDDLast4;
+    var tdd8to4 = meal_data.TDD4to8;
+    var tdd_last8_wt = ( ( ( 1.4 * tdd_4) + ( 0.6 * tdd8to4) ) * 3 );
+
+    TDD = ( tdd_last8_wt * 0.6) + ( tdd7 * 0.4 );
+    console.log("TDD = " +TDD+ " using rolling 8h weighted average extrapolation (60%) and 7 day average (40%)");
+
+           /*console.error("Pump extrapolated TDD = "+tdd_pump+"; ");
             //if (tdd7 > 0){
             if ( tdd_pump > tdd7 && now < 5 || now < 7 && TDD < ( 0.8 * tdd7 ) ){
               TDD = ( 0.8 * tdd7 );
@@ -273,7 +280,7 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
             else {
                  console.log("TDD = " +TDD+ " based on standard pump 60/tdd7 40 split; ");
                  rT.reason += "TDD: " +TDD+ " based on standard pump 60/tdd7 40 split; ";
-                 }
+                 }*/
 
         var dynISFadjust = profile.DynISFAdjust;
         var dynISFadjust = ( dynISFadjust / 100 );
