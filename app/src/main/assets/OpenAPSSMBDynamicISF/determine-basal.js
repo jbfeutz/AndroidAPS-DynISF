@@ -285,7 +285,15 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
         var dynISFadjust = profile.DynISFAdjust;
         var dynISFadjust = ( dynISFadjust / 100 );
         var TDD = (dynISFadjust * TDD);
-        var variable_sens = (277700 / ( TDD * bg));
+        if(bg <= 180){
+            var sens_bg = bg;
+            console.log("Current sensitivity for predictions is based on current bg");
+            }
+            else {
+            var sens_bg = 180;
+            console.log("Current sensitivity for predictions is limited at 210mg/dl / 11.7mmol/l");
+            }
+        var variable_sens = (277700 / ( TDD * sens_bg));
         variable_sens = round(variable_sens,1);
         if (dynISFadjust > 1 ) {
             console.log("TDD adjustment factor is: " +dynISFadjust+"; ");
@@ -815,13 +823,13 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
          console.log("EventualBG is" +eventualBG+" ;");
 
          if (bg > target_bg && glucose_status.delta < 3 && glucose_status.delta > -3 && glucose_status.short_avgdelta > -3 && glucose_status.short_avgdelta < 3 && eventualBG > target_bg && eventualBG < bg ) {
-             var future_sens = ( 277700 / (TDD * ((eventualBG * 0.5) + (bg * 0.5) ) ) );
+             var future_sens = ( 277700 / (TDD * ((eventualBG * 0.5) + (sens_bg * 0.5) ) ) );
                  console.log("Future state sensitivity is " +future_sens+" based on eventual and current bg due to flat glucose level above target");
                  rT.reason += "Dosing sensitivity: " +future_sens+" using eventual BG;";
          }
 
          else if( glucose_status.delta > 0 && eventualBG > target_bg ) {
-             var future_sens = ( 277700 / (TDD * bg) );
+             var future_sens = ( 277700 / (TDD * sens_bg) );
              console.log("Future state sensitivity is " +future_sens+" using current bg due to small delta or variation");
              rT.reason += "Dosing sensitivity: " +future_sens+" using current BG;";
              }
