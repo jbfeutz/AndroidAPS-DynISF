@@ -12,6 +12,18 @@
         <item>lgs</item>
     </string-array>
 
+    <string-array name="dynISF_insulinArray">
+        <item>@string/rapidacting</item>
+        <item>@string/Fiasp</item>
+        <item>@string/Lyumjev</item>
+    </string-array>
+    <string-array name="dynISF_insulinValues" translatable="false">
+        <item>55</item>
+        <item>65</item>
+        <item>75</item>
+    </string-array>
+
+
     <string-array name="unitsArray">
         <item>mg/dL</item>
         <item>mmol/L</item>
