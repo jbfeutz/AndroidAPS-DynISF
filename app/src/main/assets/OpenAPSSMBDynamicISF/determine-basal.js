@@ -295,13 +295,16 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
             }
         var ins_val = profile.dynISF_insulin;
         console.log("Current value for insulin: "+ins_val+"; ");
-        1800/TDDln((bg/x)+1)
+
         var variable_sens = 1800 / ( TDD * (Math.log(( bg / ins_val ) + 1 ) ) );
+        var variable_sens_old = (277700 / (TDD * bg));
         variable_sens = round(variable_sens,1);
+        variable_sens_old = round(variable_sens_old,1);
         if (dynISFadjust > 1 ) {
             console.log("TDD adjustment factor is: " +dynISFadjust+"; ");
             console.log("TDD adjusted to "+TDD+" using adjustment factor of "+dynISFadjust+"; ");
             console.log("Current sensitivity for predictions is " +variable_sens+" based on current bg");
+            console.log("Current sensitivity previously was " +variable_sens_old+"; ");
         }
         else if (dynISFadjust < 1 ){
             console.log("TDD adjustment factor is: " +dynISFadjust+"; ");
@@ -827,19 +830,25 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
 
          if (bg > target_bg && glucose_status.delta < 3 && glucose_status.delta > -3 && glucose_status.short_avgdelta > -3 && glucose_status.short_avgdelta < 3 && eventualBG > target_bg && eventualBG < bg ) {
              var future_sens = ( 1800 / (Math.log((((eventualBG * 0.5) + (bg * 0.5))/ins_val)+1)*TDD));
+             var future_sens_old = ( 277700 / (TDD * ((bg * 0.5) + (eventualBG * 0.5 ))));
                  console.log("Future state sensitivity is " +future_sens+" based on eventual and current bg due to flat glucose level above target");
+                 console.log("Old model Future state sensitivity was " +future_sens_old+"; ");
                  rT.reason += "Dosing sensitivity: " +future_sens+" using eventual BG;";
          }
 
          else if( glucose_status.delta > 0 && eventualBG > target_bg ) {
              var future_sens = ( 1800 / (Math.log((bg/ins_val)+1)*TDD));
+             var future_sens_old = ( 277700 / (TDD * bg));
              console.log("Future state sensitivity is " +future_sens+" using current bg due to small delta or variation");
+             console.log("Old model Future state sensitivity was " +future_sens_old+"; ");
              rT.reason += "Dosing sensitivity: " +future_sens+" using current BG;";
              }
 
          else {
              var future_sens = ( 1800 / (Math.log((eventualBG/ins_val)+1)*TDD));
+             var future_sens_old = ( 277700 / (TDD * eventualBG));
          console.log("Future state sensitivity is " +future_sens+" based on eventual bg due to -ve delta");
+         console.log("Old model Future state sensitivity was " +future_sens_old+"; ");
          rT.reason += "Dosing sensitivity: " +future_sens+" using eventual BG;";
          }
          var future_sens = round(future_sens,1);
