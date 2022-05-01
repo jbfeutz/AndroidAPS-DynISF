@@ -218,7 +218,7 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
         //*********************************************************************************
 
             console.error("---------------------------------------------------------");
-            console.error( " Dynamic ISF version Beta 1.6.1 ");
+            console.error( " Dynamic ISF version Beta 1.6.2 ");
             console.error("---------------------------------------------------------");
 
 
@@ -285,14 +285,14 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
         var dynISFadjust = profile.DynISFAdjust;
         var dynISFadjust = ( dynISFadjust / 100 );
         var TDD = (dynISFadjust * TDD);
-        if(bg <= 180){
+        /*if(bg <= 180){
             var sens_bg = bg;
             console.log("Current sensitivity for predictions is based on current bg");
             }
             else {
             var sens_bg = 180;
             console.log("Current sensitivity for predictions is limited at 210mg/dl / 11.7mmol/l");
-            }
+            }*/
         var ins_val = profile.dynISF_insulin;
         console.log("Current value for insulin: "+ins_val+"; ");
 
