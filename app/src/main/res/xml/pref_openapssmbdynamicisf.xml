@@ -39,12 +39,6 @@
             validate:floatminNumber="1"
             validate:testType="floatNumericRange" />
 
-        <ListPreference
-            android:defaultValue="Rapid Acting"
-            android:entries="@array/dynISF_insulinArray"
-            android:entryValues="@array/dynISF_insulinValues"
-            android:key="@string/key_dynISF_insulin"
-            android:title="@string/dynISF_insulinTitle" />
 
         <SwitchPreference
             android:defaultValue="false"

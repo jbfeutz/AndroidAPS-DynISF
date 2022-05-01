@@ -293,8 +293,21 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
             var sens_bg = 180;
             console.log("Current sensitivity for predictions is limited at 210mg/dl / 11.7mmol/l");
             }*/
-        var ins_val = profile.dynISF_insulin;
-        console.log("Current value for insulin: "+ins_val+"; ");
+        var ins_val = 55;
+        var insulin = profile.insulinType;
+        console.log("Initial insulin value for ISF: "+ins_val+"; ");
+        console.log("Current value for insulin: "+insulin+"; ");
+
+        if (insulin === 'Free-Peak Oref'){
+            ins_val = 75; }
+        else if (insulin === 'Lyumjev'){
+            ins_val = 75; }
+        else if (insulin === 'Ultra-Rapid Oref'){
+            ins_val = 65;}
+        else if (insulin === 'Rapid-Acting Oref'){
+            ins_val = 55; }
+
+        console.log("Insulin value for ISF based on profile: "+ins_val+"; ");
 
         var variable_sens = 1800 / ( TDD * (Math.log(( bg / ins_val ) + 1 ) ) );
         var variable_sens_old = (277700 / (TDD * bg));

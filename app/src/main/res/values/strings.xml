@@ -163,8 +163,7 @@
     <string name="apsmode_title">APS Mode</string>
     <string name="closedloop">Closed Loop</string>
     <string name="openloop">Open Loop</string>
-    <string name="dynISF_insulinTitle">Type of insulin used</string>
-    <string name="lowglucosesuspend">Low Glucose Suspend</string>
+   <string name="lowglucosesuspend">Low Glucose Suspend</string>
     <string name="rapidacting">Humalog/Novolog</string>
     <string name="Fiasp">Fiasp</string>
     <string name="Lyumjev">Lyumjev</string>
@@ -843,7 +842,6 @@
     <string name="time_offset">Time offset</string>
     <string name="bolus_reminder">Remind to bolus later</string>
     <string name="key_aps_mode" translatable="false">aps_mode</string>
-    <string name="key_dynISF_insulin" translatable="false">Insulin type</string>
     <string name="setupwizard_preferred_aps_mode">Preferred APS mode</string>
     <string name="treatments_wizard_total_label">Total</string>
     <string name="calculation_short">Calc</string>
