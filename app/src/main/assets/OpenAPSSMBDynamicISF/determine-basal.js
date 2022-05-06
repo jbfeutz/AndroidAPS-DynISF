@@ -247,14 +247,21 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
 
             /*var tdd_pump_now = meal_data.TDDPUMP;
             var tdd_pump = ( tdd_pump_now / (now / 24));*/
-            var TDD = (tdd7 * 0.4) + (tdd_pump * 0.6);
+            //var TDD = (tdd7 * 0.4) + (tdd_pump * 0.6);
 
+    var tdd1 = meal_data.TDDAIMI1;
     var tdd_4 = meal_data.TDDLast4;
     var tdd8to4 = meal_data.TDD4to8;
     var tdd_last8_wt = ( ( ( 1.4 * tdd_4) + ( 0.6 * tdd8to4) ) * 3 );
 
-    TDD = ( tdd_last8_wt * 0.6) + ( tdd7 * 0.4 );
-    console.log("TDD = " +TDD+ " using rolling 8h weighted average extrapolation - "+tdd_last8_wt+" - (60%) and 7 day average (40%)");
+    console.error("Rolling 8 hours weight average: "+tdd_last8_wt+"; ");
+    console.error("1-day average TDD is: "+tdd1+"; ");
+    console.error("7-day average TDD is: " +tdd7+ "; ");
+
+    //TDD = ( tdd_last8_wt * 0.6) + ( tdd7 * 0.4 );
+
+    TDD = ( tdd_last8_wt * 0.33 ) + ( tdd7 * 0.34 ) + (tdd1 * 0.33);
+    console.log("TDD = " +TDD+ " using average of 7-day, 1-day and weighted 8hr average");
 
            /*console.error("Pump extrapolated TDD = "+tdd_pump+"; ");
             //if (tdd7 > 0){
@@ -298,13 +305,13 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
         console.log("Initial insulin value for ISF: "+ins_val+"; ");
         console.log("Current value for insulin: "+insulin+"; ");
 
-        if (insulin === 'Free-Peak Oref'){
+        if (insulin == 'Free-Peak Oref'){
             ins_val = 75; }
-        else if (insulin === 'Lyumjev'){
+        else if (insulin == 'Lyumjev'){
             ins_val = 75; }
-        else if (insulin === 'Ultra-Rapid Oref'){
+        else if (insulin == 'Ultra-Rapid Oref'){
             ins_val = 65;}
-        else if (insulin === 'Rapid-Acting Oref'){
+        else if (insulin == 'Rapid-Acting Oref'){
             ins_val = 55; }
 
         console.log("Insulin value for ISF based on profile: "+ins_val+"; ");
